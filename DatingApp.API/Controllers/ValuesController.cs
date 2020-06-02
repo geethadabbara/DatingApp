@@ -21,13 +21,14 @@ namespace DatingApp.API.Controllers
             _context = context;
 
         }
+         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetValues()
         {
             var values = await _context.Values.ToListAsync();
             return Ok(values);
         }
-        [AllowAnonymous]
+       
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
