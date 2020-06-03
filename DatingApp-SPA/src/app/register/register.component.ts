@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../_services/auth.service';
 import { Router } from '@angular/router';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-register',
@@ -15,16 +16,16 @@ export class RegisterComponent implements OnInit {
     password: [''],
   });
   constructor(private fb: FormBuilder, private authService: AuthService
-             ,private router: Router) {}
+             ,private router: Router, private alertify: AlertifyService) {}
 
   ngOnInit() {}
   register() {
     this.registerModel = this.registerForm.value;
     this.authService.register(this.registerModel).subscribe( (next) => {
-      console.log('register successful');
+      this.alertify.success('register successful');
       this.registerForm.reset();
     }, (error) => {
-      console.log( error);
+      this.alertify.error(error);
     } );
   }
   cancel() {

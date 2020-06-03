@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
@@ -21,7 +23,14 @@ const appRoutes = [
     HomeComponent,
     RegisterComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, ReactiveFormsModule, RouterModule.forRoot(appRoutes)],
+  imports: [
+     BrowserModule,
+     HttpClientModule,
+     ReactiveFormsModule,
+     BrowserAnimationsModule,
+     BsDropdownModule.forRoot(),
+     RouterModule.forRoot(appRoutes)
+  ],
   providers: [
     ErrorInterceptorProvider
   ],
