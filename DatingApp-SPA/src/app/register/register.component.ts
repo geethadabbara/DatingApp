@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
     password: [''],
   });
   constructor(private fb: FormBuilder, private authService: AuthService
-    ,private router: Router) {}
+             ,private router: Router) {}
 
   ngOnInit() {}
   register() {
@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
       console.log('register successful');
       this.registerForm.reset();
     }, (error) => {
-      console.log('error while registration' + error);
+      console.log( error);
     } );
   }
   cancel() {

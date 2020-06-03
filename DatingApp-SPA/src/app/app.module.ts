@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { ErrorInterceptor, ErrorInterceptorProvider } from './_services/error.interceptor';
 
 const appRoutes = [
   { path: 'register', component: RegisterComponent },
@@ -21,7 +22,9 @@ const appRoutes = [
     RegisterComponent,
   ],
   imports: [BrowserModule, HttpClientModule, ReactiveFormsModule, RouterModule.forRoot(appRoutes)],
-  providers: [],
+  providers: [
+    ErrorInterceptorProvider
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

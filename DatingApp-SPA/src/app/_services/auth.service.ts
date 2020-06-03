@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +18,8 @@ export class AuthService {
           localStorage.setItem('token', user.token);
         }
       }),
-      catchError((error: any) => {
-        throw new Error('error while login' + error);
+      catchError((error) => {
+        return throwError(error);
       })
     );
   }
