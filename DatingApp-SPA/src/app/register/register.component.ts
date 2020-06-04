@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
   }
   cancel() {
     this.registerForm.reset();
-    this.router.navigate(['/']);
+    this.router.navigate(['/home']);
   }
   resetForm() {
     this.registerForm.reset();

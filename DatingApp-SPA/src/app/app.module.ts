@@ -10,11 +10,11 @@ import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptor, ErrorInterceptorProvider } from './_services/error.interceptor';
+import { MemberListComponent } from './member-list/member-list.component';
+import { ListsComponent } from './lists/lists.component';
+import { MessagesComponent } from './messages/messages.component';
+import { AppRoutes } from './routes';
 
-const appRoutes = [
-  { path: 'register', component: RegisterComponent },
-  {path: '', component: HomeComponent}
-];
 
 @NgModule({
   declarations: [
@@ -22,6 +22,9 @@ const appRoutes = [
     NavComponent,
     HomeComponent,
     RegisterComponent,
+    MemberListComponent,
+    ListsComponent,
+    MessagesComponent,
   ],
   imports: [
      BrowserModule,
@@ -29,7 +32,7 @@ const appRoutes = [
      ReactiveFormsModule,
      BrowserAnimationsModule,
      BsDropdownModule.forRoot(),
-     RouterModule.forRoot(appRoutes)
+     RouterModule.forRoot(AppRoutes)
   ],
   providers: [
     ErrorInterceptorProvider
