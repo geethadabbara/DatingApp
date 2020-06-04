@@ -17,8 +17,8 @@ export const AppRoutes: Routes = [
 
 
 /*DUMMY ROUTE TO APPLY GUARDS FOR MULTIPLE ROUTS*/
-// { path: 'home', component: HomeComponent },
-//   {
+// { path: '', component: HomeComponent },
+// {
 //     path: '',
 //     runGuardsAndResolvers: 'always',
 //     canActivate: [AuthGuard],
@@ -27,4 +27,6 @@ export const AppRoutes: Routes = [
 //         { path: 'lists', component: ListsComponent },
 //         { path: 'messages', component: MessagesComponent },
 //     ]
-//   },
+// },
+// { path: 'register', component: RegisterComponent },
+// { path: '**', redirectTo: '', pathMatch: 'full' }
