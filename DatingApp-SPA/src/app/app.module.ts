@@ -6,7 +6,7 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -28,6 +28,9 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { importExpr } from '@angular/compiler/src/output/output_ast';
 import { MemberDetailResovler } from './_resolvers/member-detail.resolver';
 import { MemberListResovler } from './_resolvers/member-list.resolver';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { MemberEditResovler } from './_resolvers/member-edit.resolver';
+import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -57,11 +60,13 @@ export class CustomHammerConfig extends HammerGestureConfig {
     MessagesComponent,
     MemberCardComponent,
     MemberDetailComponent,
+    MemberEditComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
@@ -80,6 +85,8 @@ export class CustomHammerConfig extends HammerGestureConfig {
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     MemberDetailResovler,
     MemberListResovler,
+    MemberEditResovler,
+    PreventUnsavedChangesGuard,
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig },
   ],
   bootstrap: [AppComponent],
