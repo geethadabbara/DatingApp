@@ -16,11 +16,20 @@ export class NavComponent implements OnInit {
     username: ['', Validators.required],
     password: ['', Validators.required],
   });
+  photoUrl: string;
 
-  constructor(private fb: FormBuilder, private authService: AuthService
-    ,         private alertify: AlertifyService, private router: Router ) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private alertify: AlertifyService,
+    private router: Router
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.authService.currentPhotoUrl.subscribe(
+      (photoUrl) => (this.photoUrl = photoUrl)
+    );
+  }
 
   login() {
     this.loginModel = this.loginForm.value;
@@ -42,6 +51,9 @@ export class NavComponent implements OnInit {
   }
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.authService.decodedToken = null;
+    this.authService.loggedInUser = null;
     this.alertify.message('user logged out');
     this.router.navigate(['/home']);
   }
