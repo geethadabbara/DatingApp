@@ -10,13 +10,14 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class UserService {
-  baseUrl = environment.baseUrl + 'user';
+  baseUrl = environment.baseUrl + 'user/';
   constructor(private http: HttpClient) {}
 
   getUsers(
     page?,
     itemsPerPage?,
-    userParams?
+    userParams?,
+    likesparams?
   ): Observable<PaginatedResult<User[]>> {
     const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<
       User[]
@@ -31,6 +32,11 @@ export class UserService {
       params = params.append('maxAge', userParams.maxAge);
       params = params.append('gender', userParams.gender);
       params = params.append('orderBy', userParams.orderBy);
+    }
+    if (likesparams != null && likesparams === 'likers') {
+      params = params.append('likers', 'true');
+    } else if (likesparams != null && likesparams === 'likees') {
+      params = params.append('likees', 'true');
     }
     return this.http
       .get<User[]>(this.baseUrl, { observe: 'response', params })
@@ -47,18 +53,21 @@ export class UserService {
       );
   }
   getUser(id: number): Observable<User> {
-    return this.http.get<User>(this.baseUrl + '/' + id);
+    return this.http.get<User>(this.baseUrl + id);
   }
   updateUser(id: number, user: User) {
-    return this.http.put<User>(this.baseUrl + '/' + id, user);
+    return this.http.put<User>(this.baseUrl + id, user);
   }
   setMainPhoto(userId: number, id: number) {
     return this.http.post(
-      this.baseUrl + '/' + userId + '/photos/' + id + '/setMain',
+      this.baseUrl + userId + '/photos/' + id + '/setMain',
       {}
     );
   }
   deletePhoto(userId: number, id: number) {
-    return this.http.delete(this.baseUrl + '/' + userId + '/photos/' + id);
+    return this.http.delete(this.baseUrl + userId + '/photos/' + id);
+  }
+  sendLike(userId: number, recipentId: number) {
+    return this.http.post(this.baseUrl + userId + '/like/' + recipentId, {});
   }
 }

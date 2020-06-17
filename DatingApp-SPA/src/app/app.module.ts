@@ -16,6 +16,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { JwtModule, JwtInterceptor } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -29,14 +30,13 @@ import { AppRoutes } from './routes';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { environment } from 'src/environments/environment';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
-import { importExpr } from '@angular/compiler/src/output/output_ast';
 import { MemberDetailResovler } from './_resolvers/member-detail.resolver';
 import { MemberListResovler } from './_resolvers/member-list.resolver';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberEditResovler } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
-import { TimeAgoPipe } from 'time-ago-pipe';
+import { ListsResovler } from './_resolvers/lists.resolver';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -98,6 +98,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     MemberDetailResovler,
     MemberListResovler,
     MemberEditResovler,
+    ListsResovler,
     PreventUnsavedChangesGuard,
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig },
   ],
